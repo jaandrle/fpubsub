@@ -1,6 +1,6 @@
 {
 	"name": "fpubsub",
-	"version": "0.9.0",
+	"version": "0.8.0",
 	"description": "PubSub pattern library with types support",
 	"keywords": [
 		"event",
