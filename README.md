@@ -44,3 +44,8 @@ Library exports:
 	- `Topic`: to anote you TypeScript topic
 	- or `fpubsubTopic`: as global type for anotating topics in JavaScript (JSDoc)
 …see [Documentation (generated from TypeScript)](./docs/README.md)
+
+## See also
+- [yamiteru/ueve: 🔥 Hellishly fast and 🤏 tiny async/sync event emitter](https://github.com/yamiteru/ueve)
+- [pubsub - npm search](https://www.npmjs.com/search?q=pubsub)
+- [emit - npm search](https://www.npmjs.com/search?q=emit)
