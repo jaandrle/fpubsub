@@ -63,13 +63,6 @@ function topicFromAbort(origin){
 	subscribe(options, onclose);
 	return options;
 }
-// TODO?
-// function topicFromInterval(interval, options= {}){
-// 	const t= topic(options);
-// 	const id= setInterval(publish.bind(null, t), interval);
-// 	subscribeClose(t, clearInterval.bind(null, id));
-// 	return t;
-// }
 
 export async function publish(topic, data){
 	if(isInactiveTopic(topic)) return 1;
