@@ -1,17 +1,12 @@
-const meta= "meta";
-const Topic= {};
-export const isTopic= candidate=> Object.getPrototypeOf(candidate) === Topic;
+/** @type {WeakMap<fpubsubTopic, { listeners?: Set<function>, data?: any }>} */
+const storage= new WeakMap();
 export function topic(options= {}){
-	if(isTopic(options)){
-		options= Object.assign({}, options);
-		Reflect.deleteProperty(options, meta);
-	}
-	const topic= Object.assign(Object.create(Topic), { origin: Topic }, options);
-	topic[meta]= { listeners: new Set() };
+	const topic= Object.assign({ origin: null }, options);
+	storage.set(topic, { listeners: new Set() });
 	return topic;
 }
 const AbortController= globalThis && globalThis.AbortController ? globalThis.AbortController : class ignore{};
-export function topicFrom(candidate){
+export function topicFrom(candidate, options){
 	if(candidate === AbortController)
 		candidate= new AbortController();
 	if(candidate instanceof AbortController)
@@ -23,16 +18,42 @@ export function topicFrom(candidate){
 		subscribe(candidate, data=> publish(t, data));
 		return t;
 	}
+
+	if("[object AsyncGeneratorFunction]"===Object.prototype.toString.call(candidate)){
+		const t= topic(options);
+		t.origin= candidate;
+		(async ()=> {
+			for await(const data of candidate())
+				publish(t, data);
+			erase(t);
+		})();
+		return t;
+	}
 	
 	throw new Error(`The '${candidate}' cannot be converted to a \`topic\`.`);
 }
-function testTopic(topic){
+export function erase(topic){ storage.delete(topic); }
+function isTopic(candidate){ return storage.has(candidate); }
+function isInactiveTopic(topic){
 	if(isTopic(topic)){
-		if(topic[meta].listeners) return 0;
+		if(storage.get(topic).listeners) return 0;
 		if(topic.once) return 1;
+		//TODO: another options?
 	}
 	const topic_str= JSON.stringify(topic);
 	throw new TypeError(`Given topic '${topic_str}' is not supported. Topic are created via 'topic' function.`);
+}
+export function info(topic){
+	let is_topic= true, is_live= false;
+	try{ is_live= isInactiveTopic(topic)===0; }
+	catch(_){ is_topic= false; }
+	return Object.freeze({
+		is_topic, is_live,
+		get data(){
+			if(!is_topic || !topic.cached) return;
+			return storage.get(topic).data;
+		}
+	});
 }
 function topicFromAbort(origin){
 	const options= topic({ once: true, origin });
@@ -51,43 +72,46 @@ function topicFromAbort(origin){
 // }
 
 export async function publish(topic, data){
-	if(testTopic(topic)) return 1;
+	if(isInactiveTopic(topic)) return 1;
 	data= toOutData(topic, data);
 	let promises= [];
-	topic[meta].listeners.forEach(function(f){
+	storage.get(topic).listeners.forEach(function(f){
 		const p= f(data, topic);
 		if(p instanceof Promise) promises.push(p);
 	});
 	if(promises.length) await Promise.all(promises);
-	if(topic.cached) topic[meta].data= data;
-	if(topic.once) topic[meta].listeners= undefined;
+	if(topic.cached) storage.get(topic).data= data;
+	if(topic.once) storage.get(topic).listeners= undefined;
 	return 0;
 }
 export const pub= publish;
+function toOutData({ mapper }, data){ return mapper ? mapper(data) : data; }
 
 export function subscribe(topic, listener, { once= false }= {}){
 	if(typeof listener!=="function") return l=> subscribe(topic, l, listener);
-	if(topic.cached) listener(topic[meta].data, topic);
-	const out= unsubscribe.bind(null, topic, listener);
+	if(topic.cached) listener(storage.get(topic).data, topic);
 	
-	if(testTopic(topic)) return out;
+	if(isInactiveTopic(topic)) return 1;
 	if(!once){
-		topic[meta].listeners.add(listener);
-		return out;
+		storage.get(topic).listeners.add(listener);
+		return 0;
 	}
-	topic[meta].listeners.add(listenerOnce(listener));
-	return out;
+	storage.get(topic).listeners.add(listenerOnce(listener));
+	return 0;
 }
 export const sub= subscribe;
+function listenerOnce(listener){ return function listenerOnce(data){ listener(data); unsubscribe(topic, listenerOnce); }; }
 export function unsubscribe(topic, listener){
-	return topic[meta].listeners ? topic[meta].listeners.delete(listener) : undefined;
+	if(isInactiveTopic(topic)) return 1;
+	return storage.get(topic).listeners.delete(listener) ? 0 : 2;
 }
 export const unsub= unsubscribe;
-function listenerOnce(listener){
-	return function listenerOnce(data){ listener(data); unsubscribe(topic, listenerOnce); };
+export function unsubscribeAll(topic){
+	if(isInactiveTopic(topic)) return 1;
+	storage.get(topic).listeners= new Set();
+	return 0;
 }
-
-function toOutData({ mapper }, data){
-	if(mapper) data= mapper(data);
-	return data;
+export function has(topic, listener){
+	if(isInactiveTopic(topic)) return false;
+	return storage.get(topic).listeners.has(listener);
 }

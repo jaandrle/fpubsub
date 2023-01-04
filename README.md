@@ -43,6 +43,7 @@ Library exports:
 - types:
 	- `Topic`: to anote you TypeScript topic
 	- or `fpubsubTopic`: as global type for anotating topics in JavaScript (JSDoc)
+
 …see [Documentation (generated from TypeScript)](./docs/README.md)
 
 ## See also

@@ -1,6 +1,12 @@
 import { topic, subscribe, publish } from '../index.js';
 const log= (...before)=> (...after)=> console.log(...before, ...after);
 
+console.log(Object.prototype.toString.call(async function* test(){
+  yield await Promise.resolve('a');
+  yield await Promise.resolve('b');
+  yield await Promise.resolve('c');
+}));
+
 /** @type {fpubsubTopic<1|2>} */
 const simple_topic= topic();
 log("Simple topic: `{}`:")(simple_topic);
