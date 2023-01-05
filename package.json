@@ -1,6 +1,6 @@
 {
 	"name": "fpubsub",
-	"version": "0.9.1",
+	"version": "0.9.2",
 	"description": "PubSub pattern library with types support",
 	"keywords": [
 		"event",
@@ -31,18 +31,18 @@
 	"main": "dist/esm.js",
 	"types": "dist/esm.d.ts",
 	"exports": {
-		".": "dist/esm.js"
+		".": "./dist/esm.js"
 	},
 	"typesVersions": {
 		"*": {
 			".": [
-				"dist/esm.d.ts"
+				"./dist/esm.d.ts"
 			]
 		}
 	},
 	"files": [
-		"./dist/esm.js",
-		"./dist/esm.d.ts"
+		"dist/esm.js",
+		"dist/esm.d.ts"
 	],
 	"type": "module",
 	"engines": {
