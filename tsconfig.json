@@ -4,7 +4,7 @@
 		"strictBindCallApply": true
 	},
 	"include": [
-		"index.d.ts",
-		"index.js"
+		"dist/esm.d.ts",
+		"dist/esm.js"
 	]
 }

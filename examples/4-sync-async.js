@@ -1,5 +1,5 @@
 /* jshint esversion: 11 */
-import { topic, subscribe, publish } from '../index.js';
+import { topic, subscribe, publish } from '../dist/esm.js';
 
 /** @type {fpubsubTopic<number>} */
 const topic_double_sync= topic({ mapper: v=> v*2 });

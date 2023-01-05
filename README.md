@@ -3,23 +3,24 @@
 # fpubsub – PubSub implementation
 This is the JavaScript implementation of the **PubSub** pattern in *JavaScript* for beeing used in functional programming approach.
 
-## Quick links
-- [Examples](#examples)
-- [Documentation](#documentation), [Documentation (generated from TypeScript)](./docs/README.md)
-
-## Examples
 ```js
 /** @type {fpubsubTopic<string>} */
-const topic_test= topic();
-subscribe(topic_test, console.log);
-publish(topic_test, "Publish info to `topic_test`.");
+const onexample= topic();
+subscribe(onexample, console.log);
+subscribe(onexample)(console.log);
+subscribe(console.log)(onexample);
 
-const publishTest= publish.bind(null, topic_test);
-publishTest("Publish info to `topic_test` again.");
+publish(onexample, "Publish info to `onexample` topic.");
+publish.bind(null, onexample)("Publish info to `onexample` again.");
+publish("Publish info to `onexample` last time.")(onexample);
 ```
-…for more examples see folder [./examples](./examples).
 
-## Documentation
+## Quick links
+- Examples: see folder [./examples](./examples)
+- [Guide](#guide)
+- [Documentation](./docs/README.md) (generated from TypeScript)
+
+## Guide
 See [Publish–subscribe pattern - Wikipedia](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) to more information about PubSub pattern.
 
 You can use library as regular npm package.
@@ -29,9 +30,9 @@ npm install fpubsub --save
 ```js
 import { topic, subscribe, publish } from "fpubsub";
 /** @type {fpubsubTopic<string>} */
-const topic$= topic();
-subscribe(topic$, console.log);
-publish(topic$, "Publish");
+const onexample= topic();
+subscribe(onexample, console.log);
+publish(onexample, "Publish info to `onexample` topic.");
 ```
 
 Library exports:
@@ -39,7 +40,7 @@ Library exports:
 	- `topic`, `topicFrom`: to generate event/topic
 	- `subscribe` (alias: `sub`): to subscribe topics
 	- `publish` (alias: `pub`): to publish messages to the given topic
-	- another helpers: `unsubscribe`, `has`, `clear`, `isTopic`
+	- another helpers: `unsubscribe` (alias: `unsub`), `has`, `erase`, `isTopic`, `valueOf`
 - types:
 	- `Topic`: to anote you TypeScript topic
 	- or `fpubsubTopic`: as global type for anotating topics in JavaScript (JSDoc)

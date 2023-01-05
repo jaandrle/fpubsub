@@ -24,25 +24,25 @@
 		"url": "https://github.com/jaandrle/fpubsub/issues"
 	},
 	"scripts": {
-		"doc": "npx typedoc index.d.ts --readme none --defaultCategory 'Internal' --categoryOrder 'Public' --categoryOrder 'Internal' --sort visibility --disableSources",
-		"lint": "npx jshint **/*.js --show-non-errors"
+		"build:lint": "npx jshint **/*.js --show-non-errors",
+		"build:doc": "npx typedoc dist/esm.d.ts --readme none --defaultCategory 'Internal' --categoryOrder 'Public' --categoryOrder 'Internal' --sort visibility --disableSources",
+		"build": "npm run build:lint && npm run build:doc"
 	},
-	"main": "index.js",
-	"types": "index.d.ts",
+	"main": "dist/esm.js",
+	"types": "dist/esm.d.ts",
 	"exports": {
-		".": "index.js"
+		".": "dist/esm.js"
 	},
 	"typesVersions": {
 		"*": {
 			".": [
-				"./index.d.ts"
+				"dist/esm.d.ts"
 			]
 		}
 	},
 	"files": [
-		"index.js",
-		"index.d.ts",
-		"dist"
+		"dist/esm.js",
+		"dist/esm.d.ts"
 	],
 	"type": "module",
 	"engines": {
@@ -58,7 +58,8 @@
 		"maxdepth": 3,
 		"maxcomplexity": 17,
 		"globals": {
-			"globalThis": false
+			"globalThis": false,
+			"AbortSignal": false
 		}
 	},
 	"devDependencies": {
