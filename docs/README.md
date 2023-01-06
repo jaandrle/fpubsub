@@ -202,7 +202,7 @@ This function can be use to erase given `topic` explicitly.
 const ontest= topic();
 subscribe(ontest, console.log);
 erase(ontest);
-publish(ontest);// throws error ⇐ no topic
+publish(ontest);// ignored ⇐ no active topic
 ```
 …but it is not neccesary:
 ```js
