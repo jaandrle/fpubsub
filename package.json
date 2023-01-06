@@ -29,14 +29,14 @@
 		"build:doc": "npx typedoc lib/esm.d.ts --readme none --includeVersion --sort visibility",
 		"build": "clear && npm run build:cjs && npm run build:lint && npm run build:doc"
 	},
-	"main": "lib/cjs.js",
+	"main": "lib/cjs.cjs",
 	"module": "lib/esm.js",
 	"types": "lib/esm.d.ts",
 	"exports": {
 		".": {
 			"import": "./lib/esm.js",
-			"browser": "./lib/cjs.js",
-			"require": "./lib/cjs.js"
+			"browser": "./lib/cjs.cjs",
+			"require": "./lib/cjs.cjs"
 		}
 	},
 	"typesVersions": {
