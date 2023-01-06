@@ -4,7 +4,7 @@
 		"strictBindCallApply": true
 	},
 	"include": [
-		"dist/esm.d.ts",
-		"dist/esm.js"
+		"lib/esm.d.ts",
+		"lib/esm.js"
 	]
 }

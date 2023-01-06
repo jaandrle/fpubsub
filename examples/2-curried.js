@@ -1,4 +1,4 @@
-import { topic, subscribe, publish } from '../dist/esm.js';
+import { topic, subscribe, publish } from '../lib/esm.js';
 const arr= length=> Array.from({ length });
 /** @type {fpubsubTopic<string>[]} */
 const topics= arr(3).map(()=> topic());
