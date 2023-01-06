@@ -24,10 +24,10 @@
 		"url": "https://github.com/jaandrle/fpubsub/issues"
 	},
 	"scripts": {
-		"build:cjs": "npx nodejsscript scripts/build.js",
+		"build:non-esm": "npx nodejsscript scripts/build.js",
 		"build:lint": "npx jshint lib/*.js --show-non-errors",
 		"build:doc": "npx typedoc lib/esm.d.ts --readme none --includeVersion --sort visibility",
-		"build": "clear && npm run build:cjs && npm run build:lint && npm run build:doc"
+		"build": "clear && npm run build:non-esm && npm run build:lint && npm run build:doc"
 	},
 	"main": "lib/cjs.cjs",
 	"module": "lib/esm.js",
@@ -35,7 +35,7 @@
 	"exports": {
 		".": {
 			"import": "./lib/esm.js",
-			"browser": "./lib/cjs.cjs",
+			"browser": "./lib/fpubsub.js",
 			"require": "./lib/cjs.cjs"
 		}
 	},
