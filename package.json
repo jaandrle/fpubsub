@@ -25,7 +25,7 @@
 	},
 	"scripts": {
 		"build:lint": "npx jshint **/*.js --show-non-errors",
-		"build:doc": "npx typedoc dist/esm.d.ts --readme none --defaultCategory 'Internal' --categoryOrder 'Public' --categoryOrder 'Internal' --sort visibility --disableSources",
+		"build:doc": "npx typedoc dist/esm.d.ts --readme none --includeVersion --sort visibility",
 		"build": "npm run build:lint && npm run build:doc"
 	},
 	"main": "dist/esm.js",

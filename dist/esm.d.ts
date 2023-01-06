@@ -70,7 +70,16 @@ export function topic<DATA extends any, DATA_IN extends any= undefined>(options?
  * FYI: [Fetch: Abort](https://javascript.info/fetch-abort)
  * */
 export function topicFrom<DATA extends any, DATA_IN extends any= undefined>(candidate: AbortController | typeof AbortController): Topic<DATA, DATA_IN>;
-/** Creates dependent topic to given topic. All listeners will be called when the original topic is published. */
+/**
+ * Creates dependent topic to given topic. All listeners will be called when the original topic is published.
+ * ```js
+ * const ontopic= topic();
+ * const onsubtopic= topicFrom(ontopic);
+ * subscribe(onsubtopic, console.log);
+ * publish(ontopic, "For all `ontopic` and `onsubtopic` listeners");
+ * publish(onsubtopic, "For only `onsubtopic` listeners");
+ * ```
+ * */
 export function topicFrom<DATA extends any, DATA_IN extends any= undefined>(candidate: Topic<any>): Topic<DATA, DATA_IN>;
 /**
  * ```js
@@ -141,6 +150,13 @@ export type ReturnStatus= 0 | 1 | 2;
  * @returns 0= done, else see {@link ReturnStatus}
  * */
 export function publish<T extends Topic<any, any>>(topic: T, value?: TopicIn<T>): Promise<ReturnStatus>
+/**
+ * Curried version of `publish`.
+ * ```js
+ * publish("value")(onexample);
+ * publish()(onexample);
+ * ```
+ * */
 export function publish<T extends Topic<any, any>>(value?: TopicIn<T>): (topic: T)=> Promise<ReturnStatus>
 export { publish as pub };
 
@@ -174,14 +190,34 @@ export type SubscribeOptions= {
  * @returns 0= done, else see {@link ReturnStatus}
  * */
 export function subscribe<T extends Topic<any, any>>(topic: T, listener: Listener<T>, options?: SubscribeOptions): ReturnStatus
-/** Curried version of `subscribe`. */
+/**
+ * Curried version of `subscribe`.
+ * ```js
+ * subscribe(onexample)(console.log);
+ * subscribe(onexample, { once: true })(console.log);
+ * ```
+ * */
 export function subscribe<T extends Topic<any, any>>(topic: T, options?: SubscribeOptions): (listener: Listener<T>)=> ReturnStatus
-/** Curried version of `subscribe`. */
+/**
+ * Curried version of `subscribe`.
+ * ```js
+ * subscribe(console.log)(onexample);
+ * subscribe(console.log, { once: true })(onexample);
+ * ```
+ * */
 export function subscribe<T extends Topic<any, any>>(listener: Listener<T>, options?: SubscribeOptions): (topic: T)=> ReturnStatus
 export { subscribe as sub };
 
 /**
  * Is `listener` listening to the given `topic`?
+ * ```js
+ * const onexample= topic();
+ * subscribe(onexample, console.log);
+ * console.log(
+ *	has(onexample, console.log)===true,
+ *	has(onexample, console.error)===false,
+ * );
+ * ```
  * @throws {TypeError} Given `topic` is not {@link Topic}!
  * */
 export function has<T extends Topic<any, any>>(topic: T, listener: Listener<T>): boolean;
