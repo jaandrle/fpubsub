@@ -86,7 +86,7 @@ async function publishA(topic, value){
 	if(topic.once) storage.get(topic).listeners= undefined;
 	return 0;
 }
-export const pub= publishA;
+export const pub= publish;
 function toOutData({ mapper }, value){ return mapper ? mapper(value) : value; }
 
 export function subscribe(topic, listener, { once= false, signal }= {}){
@@ -130,3 +130,5 @@ export function has(topic, listener){
 	if(isInactiveTopic(topic)) return false;
 	return storage.get(topic).listeners.has(listener);
 }
+
+
