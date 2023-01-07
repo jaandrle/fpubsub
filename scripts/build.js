@@ -21,18 +21,16 @@ function bundle(path_source, pkg){
 		.sed("export const ", keyword_export+".")
 		.sed(/export( async)?( function) ([^\(]*)/, keyword_export+".$3= $3;\n$1$2 $3")
 		.split("\n").join("\n\t").trim();
-	return s.echo(`(function(module_name, factory){ /* jshint browser: true, node: true *//* global define:false */
+	return s.echo(`(function(root, module_name, factory){ /* jshint browser: true, node: true *//* global define:false, self:false */
 	'use strict';
 	if (typeof define === 'function' && define.amd) {
-		define([], function(){
-			return factory();
-		});
+		define([], factory);
 	} else if (typeof exports !== 'undefined') {
 		module.exports = factory();
 	} else {
-		window[module_name]= factory();
+		root[module_name]= factory();
 	}
-})("${pkg.name}", function factory(){
+})(typeof self !== 'undefined' ? self : this, "${pkg.name}", function factory(){
 	'use strict';
 	const ${keyword_export}= {};
 	${cjm_content}
