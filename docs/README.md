@@ -1,6 +1,6 @@
-fpubsub - v0.9.5
+fpubsub - v0.9.6
 
-# fpubsub - v0.9.5
+# fpubsub - v0.9.6
 
 ## Table of contents
 
@@ -77,7 +77,7 @@ publish(onexample, "Test");
 
 #### Defined in
 
-[lib/esm.d.ts:61](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L61)
+[lib/esm.d.ts:61](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L61)
 
 ___
 
@@ -115,7 +115,7 @@ FYI: [Fetch: Abort](https://javascript.info/fetch-abort)
 
 #### Defined in
 
-[lib/esm.d.ts:74](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L74)
+[lib/esm.d.ts:74](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L74)
 
 ▸ **topicFrom**<`DATA`, `DATA_IN`\>(`candidate`): [`Topic`](README.md#topic-1)<`DATA`, `DATA_IN`\>
 
@@ -147,7 +147,7 @@ publish(onsubtopic, "For only `onsubtopic` listeners");
 
 #### Defined in
 
-[lib/esm.d.ts:85](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L85)
+[lib/esm.d.ts:85](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L85)
 
 ___
 
@@ -182,7 +182,7 @@ console.log(
 
 #### Defined in
 
-[lib/esm.d.ts:96](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L96)
+[lib/esm.d.ts:96](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L96)
 
 ___
 
@@ -216,7 +216,7 @@ console.log(valueOf(topic)==="value");
 
 #### Defined in
 
-[lib/esm.d.ts:106](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L106)
+[lib/esm.d.ts:106](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L106)
 
 ___
 
@@ -252,7 +252,7 @@ publish(ontest);// throws error ⇐ no topic
 
 #### Defined in
 
-[lib/esm.d.ts:124](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L124)
+[lib/esm.d.ts:124](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L124)
 
 ___
 
@@ -300,7 +300,7 @@ Given `topic` is not [Topic](README.md#topic-1)!
 
 #### Defined in
 
-[lib/esm.d.ts:154](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L154)
+[lib/esm.d.ts:154](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L154)
 
 ▸ **publish**<`T`\>(`value?`): (`topic`: `T`) => `Promise`<[`ReturnStatus`](README.md#returnstatus)\>
 
@@ -340,7 +340,7 @@ publish()(onexample);
 
 #### Defined in
 
-[lib/esm.d.ts:162](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L162)
+[lib/esm.d.ts:162](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L162)
 
 ___
 
@@ -389,7 +389,7 @@ Given `topic` is not [Topic](README.md#topic-1)!
 
 #### Defined in
 
-[lib/esm.d.ts:194](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L194)
+[lib/esm.d.ts:194](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L194)
 
 ▸ **subscribe**<`T`\>(`topic`, `options?`): (`listener`: [`Listener`](README.md#listener)<`T`\>) => [`ReturnStatus`](README.md#returnstatus)
 
@@ -430,7 +430,7 @@ subscribe(onexample, { once: true })(console.log);
 
 #### Defined in
 
-[lib/esm.d.ts:202](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L202)
+[lib/esm.d.ts:202](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L202)
 
 ▸ **subscribe**<`T`\>(`listener`, `options?`): (`topic`: `T`) => [`ReturnStatus`](README.md#returnstatus)
 
@@ -471,7 +471,7 @@ subscribe(console.log, { once: true })(onexample);
 
 #### Defined in
 
-[lib/esm.d.ts:210](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L210)
+[lib/esm.d.ts:210](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L210)
 
 ___
 
@@ -512,7 +512,7 @@ Given `topic` is not [Topic](README.md#topic-1)!
 
 #### Defined in
 
-[lib/esm.d.ts:225](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L225)
+[lib/esm.d.ts:225](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L225)
 
 ___
 
@@ -552,7 +552,7 @@ Given `topic` is not [Topic](README.md#topic-1)!
 
 #### Defined in
 
-[lib/esm.d.ts:237](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L237)
+[lib/esm.d.ts:237](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L237)
 
 ___
 
@@ -585,7 +585,7 @@ Given `topic` is not [Topic](README.md#topic-1)!
 
 #### Defined in
 
-[lib/esm.d.ts:249](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L249)
+[lib/esm.d.ts:249](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L249)
 
 ## Type Aliases
 
@@ -612,7 +612,7 @@ Given `topic` is not [Topic](README.md#topic-1)!
 
 #### Defined in
 
-[lib/esm.d.ts:1](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L1)
+[lib/esm.d.ts:1](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L1)
 
 ___
 
@@ -632,7 +632,7 @@ For using in JSDoc, you can use global type fpubsubTopic.
 
 #### Defined in
 
-[lib/esm.d.ts:22](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L22)
+[lib/esm.d.ts:22](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L22)
 
 ___
 
@@ -649,7 +649,7 @@ Return type of functions:
 
 #### Defined in
 
-[lib/esm.d.ts:134](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L134)
+[lib/esm.d.ts:134](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L134)
 
 ___
 
@@ -667,7 +667,7 @@ Follows [EventTarget.addEventListener() - Web APIs | MDN](https://developer.mozi
 
 #### Defined in
 
-[lib/esm.d.ts:166](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L166)
+[lib/esm.d.ts:166](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L166)
 
 ___
 
@@ -684,7 +684,7 @@ ___
 
 #### Defined in
 
-[lib/esm.d.ts:170](https://github.com/jaandrle/fpubsub/blob/caac89d/lib/esm.d.ts#L170)
+[lib/esm.d.ts:170](https://github.com/jaandrle/fpubsub/blob/ece2c3f/lib/esm.d.ts#L170)
 
 ## References
 
