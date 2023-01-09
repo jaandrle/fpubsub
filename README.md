@@ -37,7 +37,7 @@ publish(onexample, "Publish info to `onexample` topic.");
 
 Library exports:
 - functions:
-	- `topic`, `topicFrom`: to generate event/topic
+	- `topic` (, `topicFrom` – see #7): to generate event/topic
 	- `subscribe` (alias: `sub`): to subscribe topics
 	- `publish` (alias: `pub`): to publish messages to the given topic
 	- another helpers: `unsubscribe` (alias: `unsub`), `has`, `erase`, `isTopic`, `valueOf`
