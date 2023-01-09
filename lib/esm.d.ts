@@ -12,7 +12,6 @@ export type TopicOptions<DATA extends any, DATA_IN extends any= undefined>= {
 	 * */
 	once?: boolean;
 	/** Topic origin
-	 * @default null
 	 * */
 	origin?: any;
 };
@@ -20,12 +19,15 @@ export type TopicOptions<DATA extends any, DATA_IN extends any= undefined>= {
 * Topic **reference** to be used in subscribe/publish/… functions.
 * For using in JSDoc, you can use global type {@link fpubsubTopic}.
 */
-export type Topic<DATA extends any, DATA_IN extends any= undefined>= TopicOptions<DATA, DATA_IN> & {
-	/** Topic origin */
+export type Topic<DATA extends any, DATA_IN extends any= undefined>= {
+	/** Topic origin
+	 * @default null
+	 * */
 	origin: any;
-	/** Typically helpful in case of `once` topics. */
+	/** Typically helpful in case of `once` topics.
+	 * */
 	is_live: boolean;
-};
+} & TopicOptions<DATA, DATA_IN>;
 declare global{
 	/** Alias for {@link Topic} for using in JSDoc */
 	export type fpubsubTopic<DATA extends any, DATA_IN extends any= undefined>= Topic<DATA, DATA_IN>;
@@ -44,13 +46,13 @@ type TopicIn<T>= T extends Topic<infer Y , infer X> ? ( X extends undefined ? Y 
  * In JavaScript:
  * ```js
  * /** @type {fpubsubTopic<string>} *\/
- * const onexample= topic({ cached: true });
+ * const onexample= topic({ cache: true });
  * //…
  * publish(onexample, "Test");
  * ```
  * In TypeScript:
  * ```ts
- * const onexample= topic<string>({ cached: true });
+ * const onexample= topic<string>({ cache: true });
  * //…
  * publish(onexample, "Test");
  * ```
@@ -93,7 +95,7 @@ export function topicFrom<DATA extends any, DATA_IN extends any= undefined>(cand
  * */
 export function isTopic<T>(candidate: T): T extends Topic<any, any> ? true : false;
 /**
- * Returns value of given topic. Primarly make sence in case of `cached` topics, elsewhere always returns `undefined`.
+ * Returns value of given topic. Primarly make sence in case of `cache`d topics, elsewhere always returns `undefined`.
  * ```js
  * /** @type {fpubsubTopic<string>} *\/
  * const ontest= topic({ cache: true });
@@ -136,7 +138,7 @@ export type ReturnStatus= 0 | 1 | 2;
  * 
  * ```js
  * /** @type {fpubsubTopic<string>} *\/
- * const onexample= topic({ cached: true });
+ * const onexample= topic({ cache: true });
  * publish(onexample, "Test");
  * publish(onexample, "Test").then(console.log).catch(console.error);
  *
@@ -176,7 +178,7 @@ export type SubscribeOptions= {
  * 
  * ```js
  * /** @type {fpubsubTopic<string>} *\/
- * const onexample= topic({ cached: true });
+ * const onexample= topic({ cache: true });
  * subscribe(onexample, console.log);
  *
  * const options= {};
