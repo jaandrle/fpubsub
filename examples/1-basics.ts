@@ -1,4 +1,4 @@
-import { topic, subscribe, publish } from '../dist/esm.js';
+import { topic, subscribe, publish } from '../lib/esm.js';
 const log= (...before: string[])=> (...after: any[])=> console.log(...before, ...after);
 
 const simple_topic= topic<1|2>();

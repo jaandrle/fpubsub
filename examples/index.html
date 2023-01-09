@@ -1,0 +1,28 @@
+<!-- use for example `npx serve ..` (in project root) and navigate in browser to `localhost:*/examples/` -->
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title></title>
+	<meta name="description" content="">
+	<script src="../lib/fpubsub.js"></script>
+	<script>
+		var print= textContent=> document.body.append(Object.assign(document.createElement("pre"), { textContent }));
+	</script>
+</head>
+<body>
+	<script>
+		const onexample= fpubsub.topic();
+		fpubsub.subscribe(onexample, print);
+		fpubsub.publish(onexample, "Hello World from classic script!");
+	</script>
+	<script type="module">
+		import { topic, subscribe, publish } from "../lib/esm.js";
+		const onexample= topic();
+		subscribe(onexample, print);
+		publish(onexample, "Hello World from module!");
+	</script>
+</body>
+</html>

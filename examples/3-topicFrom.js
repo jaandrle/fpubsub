@@ -1,4 +1,4 @@
-import { topicFrom, subscribe, publish } from '../dist/esm.js';
+import { topicFrom, subscribe, publish } from '../lib/esm.js';
 const log= (...before)=> (...after)=> console.log(...before, ...after);
 
 /* global AbortController */

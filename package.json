@@ -1,6 +1,6 @@
 {
 	"name": "fpubsub",
-	"version": "0.9.3",
+	"version": "0.9.4",
 	"description": "PubSub pattern library with types support",
 	"keywords": [
 		"event",
@@ -24,26 +24,29 @@
 		"url": "https://github.com/jaandrle/fpubsub/issues"
 	},
 	"scripts": {
-		"build:lint": "npx jshint **/*.js --show-non-errors",
-		"build:doc": "npx typedoc dist/esm.d.ts --readme none --defaultCategory 'Internal' --categoryOrder 'Public' --categoryOrder 'Internal' --sort visibility --disableSources",
-		"build": "npm run build:lint && npm run build:doc"
+		"build:non-esm": "npx nodejsscript scripts/build.js",
+		"build:lint": "npx jshint lib/*.js --show-non-errors",
+		"build:doc": "npx typedoc lib/esm.d.ts --readme none --includeVersion --sort visibility",
+		"build": "clear && npm run build:non-esm && npm run build:lint && npm run build:doc"
 	},
-	"main": "dist/esm.js",
-	"types": "dist/esm.d.ts",
+	"main": "lib/cjs.cjs",
+	"module": "lib/esm.js",
+	"types": "lib/esm.d.ts",
 	"exports": {
-		".": "./dist/esm.js"
+		".": {
+			"import": "./lib/esm.js",
+			"browser": "./lib/fpubsub.js",
+			"require": "./lib/cjs.cjs"
+		}
 	},
 	"typesVersions": {
 		"*": {
 			".": [
-				"./dist/esm.d.ts"
+				"./lib/esm.d.ts"
 			]
 		}
 	},
-	"files": [
-		"dist/esm.js",
-		"dist/esm.d.ts"
-	],
+	"files": [ "lib" ],
 	"type": "module",
 	"engines": {
 		"node": ">=14.17"
@@ -56,7 +59,7 @@
 		"latedef": "true",
 		"maxparams": 4,
 		"maxdepth": 3,
-		"maxcomplexity": 17,
+		"maxcomplexity": 8,
 		"globals": {
 			"globalThis": false,
 			"AbortSignal": false
@@ -64,6 +67,7 @@
 	},
 	"devDependencies": {
 		"jshint": "^2.13.6",
+		"nodejsscript": "^0.9.0",
 		"typedoc": "^0.23.23",
 		"typedoc-plugin-markdown": "^3.14.0"
 	}
