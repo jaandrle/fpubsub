@@ -37,10 +37,13 @@ publish(onexample, "Publish info to `onexample` topic.");
 
 Library exports:
 - functions:
-	- `topic` (, `topicFrom` – see [#7](https://github.com/jaandrle/fpubsub/issues/7)): to generate event/topic
-	- `subscribe` (alias: `sub`): to subscribe topics
-	- `publish` (alias: `pub`): to publish messages to the given topic
-	- another helpers: `unsubscribe` (alias: `unsub`), `has`, `erase`, `isTopic`, `valueOf`
+	- [`topic`](./docs/README.md#topic): to generate event/topic
+		- you can also use with options `{ once, cache, initial, mapper }`, see [in docs](./docs/README.md#topicoptions)
+		- `topicFrom` – see [#7](https://github.com/jaandrle/fpubsub/issues/7)
+	- [`subscribe`](./docs/README.md#subscribe) (alias: `sub`): to subscribe topics
+	- [`publish`](./docs/README.md#publish) (alias: `pub`): to publish messages to the given topic
+	- [`unsubscribe`](./docs/README.md#unsubscribe) (alias: `unsub`): to remove topics listeners
+	- another helpers: `unsubscribeAll`, `has`, `erase`, `isTopic`, `valueOf`
 - types:
 	- `Topic`: to anote you TypeScript topic
 	- or `fpubsubTopic`: as global type for anotating topics in JavaScript (JSDoc)
