@@ -8,7 +8,6 @@ for(let i = 0; i < 5; ++i)
 	publish(topic_double_sync, i);
 console.log("Publish call ends");
 
-
 const sleep= ()=> new Promise(r=> setTimeout(r, Math.random() * 100));
 const asyncListener= async function(data, topic){ await sleep(); console.log(data, topic); };
 

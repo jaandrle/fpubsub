@@ -23,7 +23,6 @@ const onloop= topicFrom(async function*(){
 log("AsyncGeneratorFunction topic:")(onloop);
 subscribe(onloop, log("AsyncGeneratorFunction subscribe:"));
 
-
 /** @type {fpubsubTopic<number>} */
 const onloop_sub= topicFrom(onloop);
 log("Sub topic of `onloop`")(onloop_sub);
