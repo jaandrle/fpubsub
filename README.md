@@ -1,5 +1,3 @@
-**WIP + TBD – Wait to version 1.0.0!**
-
 # fpubsub – PubSub implementation
 This is the JavaScript implementation of the **PubSub** pattern in *JavaScript* for beeing used in functional programming approach.
 
