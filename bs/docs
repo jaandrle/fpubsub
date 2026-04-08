@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -eo pipefail # this can be harmful, see https://www.youtube.com/watch?v=4Jo3Ml53kvc
+. bs/.common || { # see skeleton/bash-common
+	echo 'Please run this script from the project root directory' >&2;
+	exit 1;
+}
+# depends on
+declare -r typedoc='node_modules/.bin/typedoc'
+declare -r code='lib/esm.d.ts'
+
+help(){
+	if ! isHelp "${@}"; then return 0; fi
+	echoReadmeInfo
+	echo
+	$typedoc --help
+	exit 0
+}
+main(){
+	help "${@}"
+
+	$typedoc "$code" \
+		--plugin typedoc-plugin-markdown \
+		--readme none \
+		--includeVersion \
+		--sort visibility
+}
+
+main "${@}"

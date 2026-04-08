@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -eo pipefail # this can be harmful, see https://www.youtube.com/watch?v=4Jo3Ml53kvc
+. bs/.common || { # see skeleton/bash-common
+	echo 'Please run this script from the project root directory' >&2;
+	exit 1;
+}
+# depends on
+declare -r lint='bs/lint'
+declare -r docs='bs/docs'
+declare -r cjs='bs/build-cjs.js'
+
+help(){
+	if ! isHelp "${@}"; then return 0; fi
+	echoReadmeInfo
+	echo
+	exit 0
+}
+main(){
+	help "${@}"
+
+	$lint
+	$cjs
+	$docs
+}
+
+main "${@}"
